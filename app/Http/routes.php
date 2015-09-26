@@ -21,6 +21,9 @@ Route::post('users/check', 'UserController@check');
 Route::get('users/create', 'UserController@create_get');
 Route::post('users/create', 'UserController@create_post');
 Route::get('users/is_created', 'UserController@is_created');
+Route::get('users/login_google', 'UserController@login_google');
+Route::get('users/disconnect_google', 'UserController@disconnect_google');
 
 Route::get('others/weather', 'OtherController@weather');
 Route::get('others/quote', 'OtherController@quote');
+Route::get('others/event/{id}', 'OtherController@event');

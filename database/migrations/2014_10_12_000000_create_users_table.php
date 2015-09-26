@@ -17,6 +17,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->integer('latest_weight');
             $table->string('device_id', 255);
+            $table->string('google_access_token', 255)->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

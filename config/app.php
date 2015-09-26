@@ -136,6 +136,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Artdarek\OAuth\OAuthServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -199,7 +200,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
         'QrCode'    => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
-        'Forecast' => Nwidart\LaravelForecast\ForecastFacade::class,
+        'Forecast'  => Nwidart\LaravelForecast\ForecastFacade::class,
+        'OAuth'     => Artdarek\OAuth\Facade\OAuth::class,
 
     ],
 

@@ -45,8 +45,18 @@ class UserController extends Controller
     {
         $deviceId = $request->input('device_id');
         $weight = $request->input('weight');
+        $googleAccessToken = $request->session()->get('google_access_token');
 
-        return view('users/create', ['device_id' => $deviceId, 'weight' => $weight]);
+        if( $deviceId && $weight )
+        {
+          $request->session()->put('deviceId', $deviceId);
+          $request->session()->put('weight', $weight);
+        } else {
+          $deviceId = $request->session()->get('deviceId');
+          $weight = $request->session()->get('weight');
+        }
+
+        return view('users/create', ['device_id' => $deviceId, 'weight' => $weight, 'googleAccessToken' => $googleAccessToken]);
     }
 
     public function create_post(Request $request)
@@ -56,6 +66,9 @@ class UserController extends Controller
         $user->device_id = $request->input('device_id');
         $user->latest_weight = $request->input('weight');
         $user->name = $request->input('name');
+        $user->google_access_token = $request->input('google_access_token');
+
+        $request->session()->forget('google_access_token');
 
         $user->save();
 
@@ -85,7 +98,6 @@ class UserController extends Controller
       return [
         'status' => 'not_created'
       ];
-
 
     }
 
@@ -151,6 +163,45 @@ class UserController extends Controller
       ];
     }
 
+    public function login_google(Request $request)
+    {
+      // get data from request
+      $code = $request->get('code');
+
+      // get google service
+      $googleService = \OAuth::consumer('Google');
+
+      // check if code is valid
+
+      // if code is provided get user data and sign in
+      if ( ! is_null($code))
+      {
+
+        // This was a callback request from google, get the token
+        $tokenData = $googleService->requestAccessToken($code);
+        $accessToken = $tokenData->getAccessToken();
+
+        $request->session()->put('google_access_token', $accessToken);
+        return redirect()->action('UserController@create_get');
+
+      }
+      // if not ask for permission first
+      else
+      {
+        // get googleService authorization
+        $url = $googleService->getAuthorizationUri();
+
+        // return to google login url
+        return redirect((string)$url);
+      }
+    }
+
+    public function disconnect_google(Request $request)
+    {
+      $request->session()->forget('google_access_token');
+
+      return redirect()->action('UserController@create_get');
+    }
     /**
      * Get all users.
      *

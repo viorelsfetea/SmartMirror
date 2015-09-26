@@ -26,10 +26,32 @@
                     <input id="checkbox2" type="checkbox" checked name="preferences_news"><label for="checkbox2">News</label>
                 </div>
             </div>
+            <div class="row">
+                <div class="large-12 columns">
+                    <a href="@if ($googleAccessToken)
+                            /users/disconnect_google
+                        @else
+                            /users/login_google
+                        @endif" class="myButton">
+                        @if ($googleAccessToken)
+                            Disconnect from Google
+                        @else
+                            Log in with Google
+                        @endif
+                    </a>
+                </div>
+            </div>
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <input type="hidden" name="device_id" value="{{ $device_id }}">
             <input type="hidden" name="weight" value="{{ $weight }}">
-            <input type="submit" value="Continue" class="button small">
+            <input type="hidden" name="google_access_token" value="{{ $googleAccessToken }}">
+            <br>
+            <div class="row">
+                <div class="large-12 columns">
+                    <input type="submit" value="Continue" class="button small">
+                </div>
+            </div>
+
         </form>
     </div>
 @endsection

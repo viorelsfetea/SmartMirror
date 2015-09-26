@@ -7,6 +7,9 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Cache;
 use Forecast;
+use App\User;
+use OAuth\OAuth2\Token\StdOAuth2Token;
+use OAuth\Common\Storage\TokenStorageInterface;
 
 class OtherController extends Controller
 {
@@ -69,5 +72,47 @@ class OtherController extends Controller
         }
 
         return $response;
+    }
+
+    public function event(Request $request, $id)
+    {
+        $user = User::find($id);
+
+        $cache_key = 'event' . $user->id;
+
+        $response = Cache::get($cache_key);
+
+        if( !$response )
+        {
+            if( !$user->google_access_token )
+            {
+                return [
+                    'status' => 'no_token'
+                ];
+            }
+            $googleService = \OAuth::consumer('Google');
+
+            $storage = $googleService->getStorage();
+
+            $token = new StdOAuth2Token();
+            $token->setAccessToken($user->google_access_token);
+
+            $storage->storeAccessToken('Google', $token);
+
+            $resultRaw = json_decode($googleService->request('https://www.googleapis.com/calendar/v3/calendars/primary/events?orderBy=startTime&singleEvents=true&timeMin=' . urlencode(date("Y-m-d\TH:i:sP"))), true);
+
+            $response = [
+              'status' => 'ok',
+              'name' => $resultRaw['items'][0]['summary'],
+              'location' => $resultRaw['items'][0]['location'],
+              'start' => date("F j, g:i a", strtotime($resultRaw['items'][0]['start']['dateTime'])),
+              'end' => date("F j, g:i a", strtotime($resultRaw['items'][0]['end']['dateTime'])),
+            ];
+
+            Cache::put($cache_key, $response, 90);
+        }
+
+        return $response;
+
     }
 }
