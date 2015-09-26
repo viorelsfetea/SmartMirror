@@ -121,6 +121,7 @@ class UserController extends Controller
       $result = [
         'status' => 'ok',
         'id' => $user->id,
+        'name' => $user->name,
         'latest_weight' => $user->latest_weight,
         'new_weight' => (int)$weight
       ];
