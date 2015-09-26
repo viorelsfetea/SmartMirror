@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\User;
+use App\History;
 use Mockery\CountValidator\Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use QrCode;
@@ -72,6 +73,8 @@ class UserController extends Controller
 
         $user->save();
 
+        $this->saveHistory($user->id, $user->latest_weight);
+
         return view('users/account_created');
 
     }
@@ -130,12 +133,15 @@ class UserController extends Controller
      */
     private function checkOK(User $user, $weight)
     {
+      $this->saveHistory($user->id, $weight);
+      
       $result = [
         'status' => 'ok',
         'id' => $user->id,
         'name' => $user->name,
         'latest_weight' => $user->latest_weight,
-        'new_weight' => (int)$weight
+        'new_weight' => (int)$weight,
+        'history' => $this->getHistory($user->id)
       ];
 
       $user->latest_weight = $weight;
@@ -143,6 +149,37 @@ class UserController extends Controller
       $user->save();
 
       return $result;
+    }
+
+    private function getHistory($id)
+    {
+      $items = History::where('user_id', '=', $id)->get();
+
+      $result = [];
+
+      foreach( $items AS $item )
+      {
+        $result[] = [
+          'day' => $item->day,
+          'weight' => $item->weight,
+        ];
+      }
+
+      return $result;
+    }
+
+    private function saveHistory($id, $weight)
+    {
+      $history = App\History::where('user_id', '=', $id)->where('day', '=', date('Y-m-d'))->get();
+
+      if( !count($history) )
+      {
+        $history = new History;
+        $history->user_id = $id;
+        $history->weight = $weight;
+        $history->day = date('Y-m-d');
+        $history->save();
+      }
     }
 
     /**
