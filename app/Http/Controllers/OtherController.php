@@ -42,7 +42,9 @@ class OtherController extends Controller
 
     public function quote()
     {
-        $fallback = "I come from a stupid family. My father worked in a bank. They caught him stealing pens.";
+        $fallbackQuote = "I come from a stupid family. My father worked in a bank. They caught him stealing pens.";
+        $fallbackAuthor = "Rodney Dangerfield";
+
         $url = "http://api.theysaidso.com/qod.json?maxlength=200&category=funny";
 
         try {
@@ -60,11 +62,12 @@ class OtherController extends Controller
                 Cache::put('quote', $response, 90);
             }
         } catch( \ErrorException $e ) {
-            $response = $fallback;
+            $response = [
+                'quote' => $fallbackQuote,
+                'author' => $fallbackAuthor
+            ];
         }
 
-        return [
-          'quote' => $response
-        ];
+        return $response;
     }
 }
