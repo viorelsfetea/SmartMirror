@@ -69,7 +69,7 @@ class UserController extends Controller
    */
     public function check(Request $request)
     {
-        $deviceId = $request->input('deviceId');
+        $deviceId = $request->input('device_id');
         $weight = $request->input('weight');
 
         $user = User::where('device_id', '=', $deviceId)
@@ -115,7 +115,7 @@ class UserController extends Controller
     {
 
       $qrCodeFile = sprintf('/qrcodes/%s.png', $deviceId.$weight);
-      $url = sprintf('%s?weight=%d&deviceId=%s', url(), $weight, $deviceId);
+      $url = sprintf('%s/users/create?weight=%d&device_id=%s', url(), $weight, $deviceId);
       QrCode::format('png')->size(600)->generate($url, '../public' . $qrCodeFile);
 
       return [
