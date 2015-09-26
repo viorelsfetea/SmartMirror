@@ -294,7 +294,14 @@ class UserController extends Controller
 
       if( !empty($user->id) )
       {
+        $qrCodeFile = sprintf('/qrcodes/edit_%d.png', $id);
+        $url = sprintf('%s/users/edit/%d', url(), $id);
+        QrCode::format('png')->size(600)->generate($url, '../public' . $qrCodeFile);
 
+        return [
+          'status' => 'not_found',
+          'qr_code' => url() . $qrCodeFile
+        ];
       }
     }
 
