@@ -20,6 +20,7 @@ Route::get('users/insert', 'UserController@insertTest');
 Route::post('users/check', 'UserController@check');
 Route::get('users/create', 'UserController@create_get');
 Route::post('users/create', 'UserController@create_post');
+Route::get('users/is_created', 'UserController@is_created');
 
 Route::get('others/weather', 'OtherController@weather');
 Route::get('others/quote', 'OtherController@quote');

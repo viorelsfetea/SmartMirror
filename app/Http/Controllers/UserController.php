@@ -20,7 +20,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        QrCode::size(600)->generate($request->url(), '../public/qrcodes/qrcode.svg');
+
     }
 
     public function insertTest()
@@ -60,6 +60,32 @@ class UserController extends Controller
         $user->save();
 
         return view('users/account_created');
+
+    }
+
+    public function is_created(Request $request)
+    {
+      $deviceId = $request->input('device_id');
+      $weight = $request->input('weight');
+
+      $user = User::where('device_id', '=', $deviceId)
+        ->where('latest_weight', '>=', $weight - 1)
+        ->where('latest_weight', '<=', $weight + 1)
+        ->first();
+
+      if( $user )
+      {
+        return [
+          'status' => 'ok',
+          'id' => $user->id,
+          'name' => $user-name
+        ];
+      }
+
+      return [
+        'status' => 'not_created'
+      ];
+
 
     }
 
