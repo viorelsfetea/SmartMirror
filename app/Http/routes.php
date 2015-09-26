@@ -22,3 +22,4 @@ Route::get('users/create', 'UserController@create_get');
 Route::post('users/create', 'UserController@create_post');
 
 Route::get('others/weather', 'OtherController@weather');
+Route::get('others/quote', 'OtherController@quote');

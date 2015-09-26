@@ -39,4 +39,29 @@ class OtherController extends Controller
 
         return $weather;
     }
+
+    public function quote()
+    {
+        $fallback = "I come from a stupid family. My father worked in a bank. They caught him stealing pens.";
+        $url = "http://api.theysaidso.com/qod.json?maxlength=200&category=funny";
+
+        try {
+            $response = Cache::get('quote');
+
+            if( !$response )
+            {
+                $apiResponse = json_decode(file_get_contents($url));
+
+                $response = $apiResponse->contents->quotes['0']->quote;
+
+                Cache::put('quote', $response, 90);
+            }
+        } catch( \ErrorException $e ) {
+            $response = $fallback;
+        }
+
+        return [
+          'quote' => $response
+        ];
+    }
 }
