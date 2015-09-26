@@ -19,6 +19,7 @@ Route::get('users', 'UserController@index');
 Route::get('users/insert', 'UserController@insertTest');
 Route::get('users/check', 'UserController@check');
 Route::get('users/create', 'UserController@create_get');
+Route::get('users/edit/{id}', 'UserController@edit');
 Route::post('users/create', 'UserController@create_post');
 Route::get('users/is_created', 'UserController@is_created');
 Route::get('users/login_google', 'UserController@login_google');

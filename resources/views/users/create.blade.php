@@ -5,18 +5,20 @@
 @section('content')
     <div class="large-12 columns">
         <h1>Smart Mirror</h1>
-        <div class="panel callout">
-            <h5>Hello there!</h5>
-            <p>It looks like it's the first time you've used the <em>SmartMirror</em>.</p>
-            <p>You're almost there, the mirror just needs your name and preferences so it can show info that's relevant to you.</p>
-        </div>
+        @if (empty($id))
+            <div class="panel callout">
+                <h5>Hello there!</h5>
+                <p>It looks like it's the first time you've used the <em>SmartMirror</em>.</p>
+                <p>You're almost there, the mirror just needs your name and preferences so it can show info that's relevant to you.</p>
+            </div>
+        @endif
     </div>
     <div class="large-12 columns">
         <form action="" method="POST" data-abide>
             <div class="row">
                 <div class="large-6 columns">
                     <label>What is your name?
-                        <input type="text" placeholder="Please write your name here" required pattern="[a-zA-Z]+" name="name" />
+                        <input type="text" placeholder="Please write your name here" required pattern="[a-zA-Z]+" name="name" value="{{$name or ''}}" />
                         <small class="error">The mirror would really like to know your name.</small>
                     </label>
                 </div>

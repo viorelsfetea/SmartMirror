@@ -134,7 +134,7 @@ class UserController extends Controller
     private function checkOK(User $user, $weight)
     {
       $this->saveHistory($user->id, $weight);
-      
+
       $result = [
         'status' => 'ok',
         'id' => $user->id,
@@ -160,7 +160,7 @@ class UserController extends Controller
       foreach( $items AS $item )
       {
         $result[] = [
-          'day' => $item->day,
+          'day' => strtotime($item->day),
           'weight' => $item->weight,
         ];
       }
@@ -281,7 +281,21 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+      $user = User::find($id);
+
+      return view('users/create', ['id' => $user->id, 'name' => $user->name, 'device_id' => $user->device_id, 'weight' => $user->latest_weight, 'googleAccessToken' => $user->google_access_token]);
+    }
+
+    public function request_edit(Request $request)
+    {
+      $id = $request->input('id');
+
+      $user = User::find($id);
+
+      if( !empty($user->id) )
+      {
+
+      }
     }
 
     /**
@@ -293,7 +307,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**
@@ -304,6 +318,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+      //
     }
 }
