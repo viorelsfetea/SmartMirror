@@ -52,7 +52,10 @@ class OtherController extends Controller
             {
                 $apiResponse = json_decode(file_get_contents($url));
 
-                $response = $apiResponse->contents->quotes['0']->quote;
+                $response = [
+                  'quote' => $apiResponse->contents->quotes['0']->quote,
+                  'author' => $apiResponse->contents->quotes['0']->author,
+                ];
 
                 Cache::put('quote', $response, 90);
             }
