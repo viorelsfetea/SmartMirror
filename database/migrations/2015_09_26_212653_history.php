@@ -13,7 +13,7 @@ class History extends Migration
     public function up()
     {
         Schema::create('history', function (Blueprint $table) {
-            $table->string('user_id');
+            $table->integer('user_id');
             $table->date('day');
             $table->integer('weight');
             $table->timestamps();

@@ -68,6 +68,8 @@ class UserController extends Controller
         $user->latest_weight = $request->input('weight');
         $user->name = $request->input('name');
         $user->google_access_token = $request->input('google_access_token');
+        $user->options_show_quote = ($request->has('options_show_quote')) ? true : false;
+        $user->options_show_calendar = ($request->has('options_show_calendar')) ? true : false;
 
         $request->session()->forget('google_access_token');
 
@@ -299,8 +301,12 @@ class UserController extends Controller
         QrCode::format('png')->size(600)->generate($url, '../public' . $qrCodeFile);
 
         return [
-          'status' => 'not_found',
+          'status' => 'ok',
           'qr_code' => url() . $qrCodeFile
+        ];
+      } else {
+        return [
+          'status' => 'not_found'
         ];
       }
     }

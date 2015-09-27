@@ -23,13 +23,7 @@
                     </label>
                 </div>
                 <div class="large-6 columns">
-                    <label>What would you like to see?</label>
-                    <input id="checkbox1" type="checkbox" checked name="preferences_quote"><label for="checkbox1">Quote of the day</label>
-                    <input id="checkbox2" type="checkbox" checked name="preferences_news"><label for="checkbox2">News</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="large-12 columns">
+                    <label>Social login</label>
                     <a href="@if ($googleAccessToken)
                             /users/disconnect_google
                         @else
@@ -41,6 +35,14 @@
                             Log in with Google
                         @endif
                     </a>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="large-6 columns">
+                    <label>What would you like to see?</label>
+                    <input id="checkbox1" type="checkbox" checked name="options_show_quote"><label for="checkbox1">Quote of the day</label>
+                    <input id="checkbox2" type="checkbox" name="options_show_calendar"><label for="checkbox2">Your events <em>(needs Google login)</em></label>
                 </div>
             </div>
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
