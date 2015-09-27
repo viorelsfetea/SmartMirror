@@ -96,7 +96,8 @@ class UserController extends Controller
         return [
           'status' => 'ok',
           'id' => $user->id,
-          'name' => $user->name
+          'name' => $user->name,
+          'calendar' => $user->google_access_token?true:false,
         ];
       }
 
@@ -143,6 +144,7 @@ class UserController extends Controller
         'name' => $user->name,
         'latest_weight' => $user->latest_weight,
         'new_weight' => (int)$weight,
+        'calendar' => $user->google_access_token?true:false,
         'history' => $this->getHistory($user->id)
       ];
 
