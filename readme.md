@@ -22,7 +22,8 @@ That's the fun part! You can log in seamlessly: just hop on the board and your p
 We hope you'll have as much fun using the mirror [as we had developing it](http://ak-hdl.buzzfed.com/static/2014-07/18/11/enhanced/webdr08/anigif_enhanced-buzz-9623-1405698176-4.gif)
 
 ###Demo
-<iframe width="560" height="315" src="https://www.youtube.com/embed/LtVchsQsShU" frameborder="0" allowfullscreen></iframe>
+[![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/LtVchsQsShU/1.jpg)](http://www.youtube.com/watch?v=LtVchsQsShU)
+
 ###Talk tech to me, baby
 Uhm, ok. Here are the repos:
 
