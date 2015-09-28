@@ -1,27 +1,33 @@
-## Laravel PHP Framework
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+Smart Mirror
+========================
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+The Smart Mirror is your family's DYI morning buddy. It helps you start up your days by showing the info that's important to you... while you brush your teeth! Did we mention it also helps you stay in shape? 
 
-Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+See your weight. 
 
-## Official Documentation
+See your weight history as a graph. 
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+See your calendar. 
 
-## Contributing
+Meet your colleagues at work with a funny quote your mirror told you this morning!
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+Have a good laugh with the day's [best GIF](http://ak-hdl.buzzfed.com/static/2014-07/18/8/enhanced/webdr04/anigif_enhanced-buzz-21129-1405685676-5.gif).
 
-## Security Vulnerabilities
+###But how does the mirror know who is using it?
+That's the fun part! You can log in seamlessly: just hop on the board and your profile will load*. First time using the mirror? You just need a smartphone for two minutes to let the mirror know who you are. You scan a QR code which will load your profile page. Just tell the mirror your name and you're good to go.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+\*We use the board to identify body data for each user. Combine it with the mirror's data and that's your login. We call it ***1-Step-Authentication***: you step on the board and you're in.
 
-### License
+We hope you'll have as much fun using the mirror [as we had developing it](http://ak-hdl.buzzfed.com/static/2014-07/18/11/enhanced/webdr08/anigif_enhanced-buzz-9623-1405698176-4.gif)
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+###Demo
+<iframe width="560" height="315" src="https://www.youtube.com/embed/LtVchsQsShU" frameborder="0" allowfullscreen></iframe>
+###Talk tech to me, baby
+Uhm, ok. Here are the repos:
+
+App: [https://github.com/Konkrad/smartmirror](https://github.com/Konkrad/smartmirror)
+
+Backend: [https://github.com/viorelsfetea/SmartMirror](https://github.com/viorelsfetea/SmartMirror)
+
+*This proof of concept has been built using a Wii FitBoard, a Samsung Galaxy Nexus that runs a Cordova app and a DYI mirror-kit. Building the mirror was the hardest part.*
