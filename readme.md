@@ -1,6 +1,9 @@
 
 Smart Mirror
 ========================
+This project was planned and built during Oktoberhackfest, Germany's biggest hackathon in 2015, **where it won the big prize in the Technology category**.
+
+[![Oktoberhackfest](http://i.imgur.com/nPmHxcd.png)](http://oktoberhackfest.com/)
 
 The Smart Mirror is your family's DYI morning buddy. It helps you start up your days by showing the info that's important to you... while you brush your teeth! Did we mention it also helps you stay in shape? 
 
